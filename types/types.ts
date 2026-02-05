@@ -4,6 +4,9 @@ export interface Article {
   title: {
     rendered: string,
   },
+  excerpt: {
+    rendered: string,
+  },
   status: string,
   content: {
     rendered: string,

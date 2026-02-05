@@ -1,0 +1,207 @@
+{
+    "meta": {
+        "system_name": "Editorial Soft-Neumorphic UI",
+        "domain": "Content-heavy editorial / news interface",
+        "design_intent": [
+            "Readable long-form layouts",
+            "Calm, premium editorial tone",
+            "Theme-aware (light/dark) adaptability",
+            "Card-driven modularity"
+        ]
+    },
+    "typography": {
+        "font_family": {
+            "primary": "Poppins",
+            "fallback": [
+                "Inter",
+                "system-ui",
+                "sans-serif"
+            ]
+        },
+        "scale": {
+            "display": {
+                "font_weight": 500,
+                "line_height": 1.2,
+                "letter_spacing": "-0.02em"
+            },
+            "heading": {
+                "font_weight": 500,
+                "line_height": 1.3,
+                "letter_spacing": "-0.01em"
+            },
+            "body": {
+                "font_weight": 400,
+                "line_height": 1.6,
+                "letter_spacing": "0em"
+            },
+            "meta": {
+                "font_weight": 400,
+                "line_height": 1.4,
+                "letter_spacing": "0.01em"
+            }
+        },
+        "usage_rules": {
+            "headings": "Sentence case, no text transformation",
+            "labels": "Title case, compact spacing",
+            "metadata": "Smaller size, reduced opacity"
+        }
+    },
+    "color_system": {
+        "mode_support": [
+            "light",
+            "dark"
+        ],
+        "palette": {
+            "background_primary": {
+                "light": "#f9f4ed",
+                "dark": "#2a2a2a"
+            },
+            "background_secondary": {
+                "light": "#eaeaea",
+                "dark": "#1f1f1f"
+            },
+            "surface_card": {
+                "light": "#ffffff",
+                "dark": "#2f2f2f"
+            },
+            "accent_primary": "#af695c",
+            "text_primary": {
+                "light": "#2a2a2a",
+                "dark": "#f4f4f4"
+            },
+            "text_secondary": {
+                "light": "#6b6b6b",
+                "dark": "#b0b0b0"
+            },
+            "border_subtle": {
+                "light": "rgba(0,0,0,0.08)",
+                "dark": "rgba(255,255,255,0.08)"
+            }
+        },
+        "contrast_rules": {
+            "body_text_min_ratio": 4.5,
+            "heading_min_ratio": 3.0,
+            "accent_usage": "Never used for long-form text"
+        }
+    },
+    "layout_system": {
+        "container": {
+            "max_width": 1200,
+            "padding": {
+                "desktop": 32,
+                "tablet": 24,
+                "mobile": 16
+            },
+            "border_radius": 24
+        },
+        "grid": {
+            "type": "asymmetrical editorial grid",
+            "columns": 12,
+            "gutter": 24,
+            "breakpoints": {
+                "desktop": ">=1200px",
+                "tablet": "768px–1199px",
+                "mobile": "<768px"
+            }
+        },
+        "content_flow": {
+            "primary_column": "Dominant visual or feature card",
+            "secondary_column": "Supporting cards or highlights",
+            "sidebar": "Statistical or condensed content blocks"
+        }
+    },
+    "components": {
+        "navigation": {
+            "style": "Minimal top navigation",
+            "alignment": "Left-aligned primary links",
+            "interaction": {
+                "hover": "Opacity increase",
+                "active": "Accent underline or pill highlight"
+            }
+        },
+        "category_pills": {
+            "shape": "Fully rounded",
+            "border": "1px solid border_subtle",
+            "padding": "6px 14px",
+            "font_size": 13,
+            "active_state": {
+                "border_color": "accent_primary",
+                "text_color": "accent_primary"
+            }
+        },
+        "cards": {
+            "shape": "Soft rounded rectangle",
+            "radius": 20,
+            "shadow": {
+                "light": "0 10px 30px rgba(0,0,0,0.06)",
+                "dark": "none"
+            },
+            "spacing": {
+                "internal": 20,
+                "vertical_stack": 24
+            },
+            "image_behavior": {
+                "aspect_ratio": "Freeform but stable",
+                "corner_radius": 16,
+                "overflow": "hidden"
+            }
+        },
+        "stat_block": {
+            "emphasis": "Numerical hierarchy",
+            "background": "accent_primary",
+            "text_color": "#ffffff",
+            "alignment": "Left",
+            "radius": 16
+        }
+    },
+    "interaction_design": {
+        "motion": {
+            "easing": "ease-out",
+            "duration_ms": 180,
+            "usage": [
+                "Hover elevation",
+                "Theme toggle",
+                "Navigation state changes"
+            ]
+        },
+        "theme_toggle": {
+            "transition": "Background and text colors crossfade",
+            "no_layout_shift": true
+        }
+    },
+    "visual_language": {
+        "aesthetic": [
+            "Soft editorial",
+            "Calm minimalism",
+            "Premium neutral tones"
+        ],
+        "avoid": [
+            "Hard shadows",
+            "High-saturation colors",
+            "Dense borders"
+        ],
+        "emphasis_strategy": {
+            "primary": "Scale and whitespace",
+            "secondary": "Color accent",
+            "tertiary": "Subtle contrast shifts"
+        }
+    },
+    "ai_replication_guidelines": {
+        "priority_signals": [
+            "Whitespace dominance",
+            "Rounded geometry consistency",
+            "Typography restraint",
+            "Accent color scarcity"
+        ],
+        "do_not_infer": [
+            "Content meaning",
+            "Image subject matter",
+            "Real-world entities"
+        ],
+        "style_consistency_checks": [
+            "Border radius uniformity",
+            "Text contrast compliance",
+            "Grid alignment across breakpoints"
+        ]
+    }
+}

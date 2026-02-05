@@ -30,8 +30,8 @@ export default async function ArticlePage({ params }: Props) {
 
     return (
         <main className="space-y-8 px-52 py-4">
-            <header className="mt-8 text-2xl text-center px-52 py-4 rounded-xl border border-gray-50 dark:border-gray-900">{title}</header>
-            <img src={imgData.source_url} alt={imgData.alt_text} className="w-[28rem] h-auto object-contain mx-auto" />
+            <header className="mt-8 text-2xl text-center px-52 py-4 rounded-xl border border-gray-50 dark:border-gray-900" dangerouslySetInnerHTML={{ __html: title }}></header>
+            <img src={imgData.source_url} alt={imgData.alt_text} className="w-md h-auto object-contain mx-auto" />
             <div className="text-justify space-y-4 p-10 rounded-2xl border border-gray-50 dark:border-gray-900" dangerouslySetInnerHTML={{ __html: content }}></div>
         </main>
     );
