@@ -33,8 +33,8 @@ export default async function ArticleCard({ article, featured = false }: Props) 
             href={`/${article.id}`}
             className={`
                 p-5 bg-surface-card rounded-[20px] space-y-3 text-left cursor-pointer
-                shadow-(--shadow-card) hover:shadow-(--shadow-card-hover)
-                transition-shadow duration-180 ease-out
+                shadow-(--shadow-card) hover:shadow-(--shadow-card-hover) border border-transparent
+                transition-shadow duration-180 ease-out dark:shadow-none dark:hover:border-accent dark:hover:shadow-none
                 ${featured ? "md:col-span-2 lg:col-span-2" : ""}
             `}
         >

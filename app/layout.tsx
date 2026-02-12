@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Search } from 'lucide-react';
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import SearchButton from "@/components/SearchButton";
 
 const poppinsFont = Poppins({
   variable: "--font-poppins",
@@ -35,9 +35,7 @@ export default function RootLayout({
           <header className="py-4 flex justify-between items-center max-w-[1200px] w-full mx-auto px-4 md:px-6 lg:px-8 rounded-b-3xl">
             <ThemeToggle />
             <h1 className="text-display text-xl md:text-2xl">Junior Digest</h1>
-            <button className="p-2 rounded-full border border-border-subtle cursor-pointer hover:border-accent hover:text-accent transition-all duration-180 ease-out">
-              <Search className="h-5 w-5" />
-            </button>
+            <SearchButton />
           </header>
           <Navbar />
           {children}

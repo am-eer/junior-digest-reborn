@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useEffect, useState} from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
@@ -8,9 +8,9 @@ const btnStyle = "p-2 rounded-full border border-border-subtle cursor-pointer ho
 
 export function ThemeToggle() {
     const { setTheme, theme } = useTheme()
-    const [mounted, setMounted] = React.useState(false)
+    const [mounted, setMounted] = useState(false)
 
-    React.useEffect(() => {
+    useEffect(() => {
         setMounted(true)
     }, [])
 
