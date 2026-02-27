@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="min-h-full" suppressHydrationWarning>
       <body
-        className={`${poppinsFont.variable} antialiased min-h-full flex flex-col font-sans bg-gradient bg-cover bg-center bg-fixed bg-no-repeat dark:bg-none`}
+        className={`${poppinsFont.variable} antialiased min-h-full flex flex-col font-sans bg-background`}
       >
         <ThemeProvider
           attribute="class"
@@ -34,13 +34,13 @@ export default function RootLayout({
         >
           <header className="py-4 flex justify-between items-center max-w-[1200px] w-full mx-auto px-4 md:px-6 lg:px-8 rounded-b-3xl">
             <ThemeToggle />
-            <h1 className="text-display text-xl md:text-2xl">Junior Digest</h1>
+            <h1 className="text-display text-md md:text-[1.25rem] px-8 py-4 rounded-full border-2 border-accent bg-surface-card">Junior Digest</h1>
             <SearchButton />
           </header>
           <Navbar />
           {children}
           <footer className="mt-auto py-6 text-center text-meta text-text-secondary max-w-[1200px] w-full mx-auto px-4 md:px-6 lg:px-8 rounded-t-3xl">
-            &copy; {(new Date()).getFullYear()} Junior Digest
+            &copy; 2026 Junior Digest
           </footer>
         </ThemeProvider>
       </body>

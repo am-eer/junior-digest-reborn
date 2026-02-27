@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CONTACT_EMAIL } from "@/lib/globals";
 
-const baseStyle = "px-3 py-1.5 text-meta transition-opacity duration-[180ms] ease-out hover:opacity-70";
-const activeStyle = "border-b-2 border-accent text-accent";
+const baseStyle = "px-3 py-1.5 text-meta transition-opacity duration-[180ms] ease-out hover:text-text-secondary";
+const activeStyle = "border-b-2 border-accent-dark text-accent-dark";
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -12,7 +13,7 @@ export default function Navbar() {
     const links = [
         { href: "/", label: "Home" },
         { href: "/team", label: "Team" },
-        { href: "/contact", label: "Contact" },
+        { href: `mailto:${CONTACT_EMAIL}`, label: "Contact" },
     ];
 
     return (

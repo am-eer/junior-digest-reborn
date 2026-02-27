@@ -1,45 +1,34 @@
 @import "tailwindcss";
 
-/* Design Tokens from design.json - Editorial Soft-Neumorphic UI */
 :root {
   /* Backgrounds */
-  --background: #f9f4ed;
+  --background: #fff9f5;
   --background-secondary: #eaeaea;
   --surface-card: #ffffff;
 
   /* Text */
-  --foreground: #2a2a2a;
-  --text-secondary: #6b6b6b;
+  --foreground: #3d3436;
+  --text-secondary: #78716C;
 
   /* Accent */
-  --accent: #af695c;
+  --accent: #ff7e5f;
+  --accent-dark: #b35340;
+  --accent-subtle: #ffe0d6;
 
-  /* Border */
-  --border-subtle: rgba(0, 0, 0, 0.08);
-
-  /* Shadows - light mode only */
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 14px 40px rgba(0, 0, 0, 0.1);
-
-  /* --tw-gradient-stops: #abc8de 0.000%, #c7c9d8 16.667%, #e5cccf 33.333%, #ffd3c7 50.000%, #ffdbc2 66.667%, #ffe4c0 83.333%, #ffedc3 100.000%; */
+  /* Shadows */
+  --card-mask: 0 -5rem 3.5rem var(--surface-card);
 }
 
 .dark {
   /* Backgrounds */
-  --background: #2a2a2a;
+  --background: #2a2024;
   --background-secondary: #1f1f1f;
-  --surface-card: #2f2f2f;
+  --surface-card: #392f35;
 
   /* Text */
-  --foreground: #f4f4f4;
+  --foreground: #f2e9e4;
   --text-secondary: #b0b0b0;
-
-  /* Border */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-
-  /* Shadows - none in dark mode */
-  --shadow-card: none;
-  --shadow-card-hover: none;
+  --accent-subtle: #463a41;
 }
 
 @theme inline {
@@ -49,7 +38,9 @@
   --color-foreground: var(--foreground);
   --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
-  --color-border-subtle: var(--border-subtle);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
+  --color-accent-subtle: var(--accent-subtle);
 
   /* Typography - Poppins fallback chain */
   --font-sans: var(--font-poppins), Inter, system-ui, sans-serif;

@@ -2,9 +2,12 @@ import { API_JSON_URL } from "@/lib/globals";
 import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryFilter from "@/components/CategoryFilter";
+import Pagination from "@/components/Pagination";
 
 export default async function Home() {
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=20&_embed`);
+  const fields = "&_fields=id,title,date_gmt,content,status,_links,_embedded";
+  const response = await fetch(`${API_JSON_URL}/posts?per_page=20&_embed${fields}`);
+  const totalPages = Math.trunc((Number(response.headers.get('X-WP-Total')) + 1)/21);
   let articles = await response.json() as Article[];
   articles = articles.filter(article => article.status && article.status === "publish");
 
@@ -32,6 +35,11 @@ export default async function Home() {
     <>
       <CategoryFilter />
       {articleGrid}
+      <Pagination
+        currentPage={1}
+        totalPages={totalPages}
+        buildHref={(page) => page === 1 ? "/" : `/${page}`}
+      />
     </>
   );
 }
