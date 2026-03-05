@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CONTACT_EMAIL } from "@/lib/globals";
 
-const baseStyle = "px-3 py-1.5 text-meta transition-opacity duration-[180ms] ease-out hover:text-text-secondary";
+const baseStyle = "px-3 py-1.5 text-meta transition-opacity duration-180 ease-out hover:text-text-secondary";
 const activeStyle = "border-b-2 border-accent-dark text-accent-dark";
 
 export default function Navbar() {

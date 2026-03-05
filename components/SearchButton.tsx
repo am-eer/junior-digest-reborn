@@ -32,7 +32,7 @@ export default function SearchButton() {
     return (
         <div className="relative flex items-center">
             {isExpanded ? (
-                <div className="flex items-center gap-2 animate-in fade-in slide-in-from-right-2 duration-200">
+                <div className="flex items-center gap-2 animate-in fade-in slide-in-from-right-2 duration-180">
                     <input
                         ref={inputRef}
                         type="text"

@@ -6,8 +6,8 @@ import Pagination from "@/components/Pagination";
 
 export default async function Home() {
   const fields = "&_fields=id,title,date_gmt,content,status,_links,_embedded";
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=20&_embed${fields}`);
-  const totalPages = Math.trunc((Number(response.headers.get('X-WP-Total')) + 1)/21);
+  const response = await fetch(`${API_JSON_URL}/posts?per_page=23&_embed${fields}`);
+  const totalPages = Math.ceil((Number(response.headers.get('X-WP-Total')) + 1)/24);
   let articles = await response.json() as Article[];
   articles = articles.filter(article => article.status && article.status === "publish");
 

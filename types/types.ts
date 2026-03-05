@@ -1,11 +1,8 @@
 export interface Article {
   id: number,
   date_gmt: string,
-  slug: string,
+  modified_gmt: string,
   title: {
-    rendered: string,
-  },
-  excerpt: {
     rendered: string,
   },
   status: string,
@@ -13,10 +10,14 @@ export interface Article {
     rendered: string,
     protected: boolean,
   },
-  "_embedded": {
+  _embedded: {
     "wp:featuredmedia": {
-      "source_url": string,
-      "alt_text": string,
-    }[]
+      source_url: string,
+      alt_text: string,
+    }[],
+    "wp:term": {
+      id: number,
+      name: string,
+    }[][],
   },
 }

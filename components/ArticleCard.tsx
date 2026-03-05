@@ -1,21 +1,12 @@
-import { FALLBACK_IMG } from "@/lib/globals";
 import type { Article } from "@/types/types";
+import { FALLBACK_IMG } from "@/lib/globals";
 import Link from "next/link";
-import { goodImgCheck } from "@/lib/utils";
+import { goodImgCheck, formatContent } from "@/lib/utils";
 import TimeAgo from "./TimeAgo";
 
 interface Props {
     article: Article,
     featured?: boolean,
-}
-
-function formatContent(htmlString: string): string {
-    let result = htmlString;
-    const imgHtml = htmlString.match(/<img[^>]+>/);
-    if (imgHtml) result = htmlString.replace(imgHtml[0], "");    
-    const colonIdx = result.substring(0, 100).indexOf(":");
-    result = `<b>${result.substring(0, colonIdx + 1)}</p></b><p>${result.substring(colonIdx + 1)}`;
-    return result;
 }
 
 export default async function ArticleCard({ article, featured = false }: Props) {
@@ -28,13 +19,13 @@ export default async function ArticleCard({ article, featured = false }: Props) 
         display: false
     };
 
-    if (article._embedded["wp:featuredmedia"] && 0 < article._embedded["wp:featuredmedia"].length) {
+    if(article._embedded["wp:featuredmedia"] && 0 < article._embedded["wp:featuredmedia"].length) {
         const fetchedImgData = article._embedded["wp:featuredmedia"][0];
-        if (fetchedImgData.source_url) {
+        if(fetchedImgData.source_url) {
             imgData.source_url = fetchedImgData.source_url;
             imgData.display = true;
         }
-        if (fetchedImgData.alt_text) {
+        if(fetchedImgData.alt_text) {
             imgData.alt_text = fetchedImgData.alt_text;
         }
     }
@@ -61,7 +52,6 @@ export default async function ArticleCard({ article, featured = false }: Props) 
             }
             <TimeAgo dateGmt={publishDate} className="text-accent" />
             <h2 className="text-heading text-lg pt-3" dangerouslySetInnerHTML={{ __html: title }}></h2>
-            {/* <div>{JSON.stringify(imageFromContent)}</div> */}
             <div className="text-body text-text-secondary" dangerouslySetInnerHTML={{ __html: content }}></div>
         </Link>
     );

@@ -11,7 +11,7 @@ interface Props {
 export default async function Home({ params }: Props) {
   const { pageNo } = await params;  
   const fields = "&_fields=id,title,date_gmt,content,status,_links,_embedded";
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=21&offset=20&page=${Number(pageNo)-1}&_embed${fields}`);
+  const response = await fetch(`${API_JSON_URL}/posts?per_page=24&offset=${23 + 24 * (Number(pageNo)-2)}&_embed${fields}`);
   const totalPages = Number(response.headers.get('X-WP-TotalPages'));
   let articles = await response.json() as Article[];
   articles = articles.filter(article => article.status && article.status === "publish");

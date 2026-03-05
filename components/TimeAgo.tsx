@@ -52,7 +52,7 @@ export default function TimeAgo({ dateGmt, className }: Props) {
     if (!text) return null;
 
     return (
-        <time dateTime={dateGmt} className={className} suppressHydrationWarning>
+        <time dateTime={dateGmt} className={className}>
             {text}
         </time>
     );

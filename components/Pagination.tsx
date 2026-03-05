@@ -20,32 +20,24 @@ interface PaginationProps {
  */
 function getPageNumbers(current: number, total: number): number[] {
   if (total <= 7) {
-    return Array.from({ length: total }, (_, i) => i + 1);
+    return Array.from({ length: total }, (e, i) => i + 1);
   }
 
-  const pages = new Set<number>();
-  pages.add(1);
-  pages.add(total);
-
-  // Current page and its neighbors (±2)
-  for (let i = current - 2; i <= current + 2; i++) {
-    if (i >= 1 && i <= total) {
-      pages.add(i);
-    }
-  }
-
-  const sorted = Array.from(pages).sort((a, b) => a - b);
-
+  const pages = [1];
   // Insert ellipsis sentinels (-1) where there are gaps
-  const result: number[] = [];
-  for (let i = 0; i < sorted.length; i++) {
-    if (i > 0 && sorted[i] - sorted[i - 1] > 1) {
-      result.push(-1);
+  if(current > 3 ) pages.push(-1);
+  // Current page and its neighbors (±2)
+  const leftOffset = current > total - 3 ? current - total + 2 : 0;
+  const rightOffset = current < 3? 3 - current : 0;
+  for (let i = current - 2 - leftOffset; i <= current + 2 + rightOffset; i++) {
+    if (i > 1 && i < total) {
+      pages.push(i);
     }
-    result.push(sorted[i]);
   }
-
-  return result;
+  // Insert ellipsis sentinels (-1) where there are gaps
+  if(total > current + 3) pages.push(-1);
+  pages.push(total);
+  return pages;
 }
 
 export default function Pagination({
@@ -56,59 +48,48 @@ export default function Pagination({
   if (totalPages <= 1) return null;
 
   const pages = getPageNumbers(currentPage, totalPages);
-
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPages;
 
   const navBtnBase =
-    "flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 ease-out shrink-0";
+    "flex items-center justify-center w-9 h-9 rounded-full transition-all duration-180 ease-out shrink-0";
   const navBtnEnabled =
-    "text-text-secondary border border-accent-subtle hover:border-accent hover:text-accent hover:scale-105 active:scale-95 cursor-pointer";
+    "text-text-secondary border border-accent-subtle hover:border-accent hover:text-accent active:cursor-pointer";
   const navBtnDisabled =
     "text-text-secondary/30 border border-accent-subtle/40 pointer-events-none";
 
   return (
     <nav
       aria-label="Page navigation"
-      className="flex items-center justify-center gap-1.5 py-8 px-4 select-none max-w-[1200px] w-full mx-auto"
+      className="flex items-center justify-center py-8 px-4 select-none max-w-[1200px] w-full mx-auto md:gap-1.5"
     >
-      {/* First page */}
-      {isFirst ? (
-        <span className={`${navBtnBase} ${navBtnDisabled}`} aria-disabled="true">
-          <ChevronFirst className="w-4 h-4" />
-        </span>
-      ) : (
-        <Link
-          href={buildHref(1)}
-          className={`${navBtnBase} ${navBtnEnabled}`}
-          aria-label="First page"
-        >
-          <ChevronFirst className="w-4 h-4" />
-        </Link>
-      )}
+      {/* First page button */}
+      <Link
+        href={buildHref(1)}
+        className={`${navBtnBase} ${isFirst ? navBtnDisabled : navBtnEnabled} hidden md:flex`}
+        aria-disabled={isFirst}
+        aria-label="First page"
+      >
+        <ChevronFirst className="w-4 h-4" />
+      </Link>
 
-      {/* Previous page */}
-      {isFirst ? (
-        <span className={`${navBtnBase} ${navBtnDisabled}`} aria-disabled="true">
-          <ChevronLeft className="w-4 h-4" />
-        </span>
-      ) : (
-        <Link
-          href={buildHref(currentPage - 1)}
-          className={`${navBtnBase} ${navBtnEnabled}`}
-          aria-label="Previous page"
-        >
-          <ChevronLeft className="w-4 h-4" />
-        </Link>
-      )}
+      {/* Previous page button */}
+      <Link
+        href={buildHref(currentPage - 1)}
+        className={`${navBtnBase} ${isFirst ? navBtnDisabled : navBtnEnabled}`}
+        aria-disabled={isFirst}
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="w-4 h-4" />
+      </Link>
 
       {/* Page numbers */}
-      <div className="flex items-center gap-1 mx-1 sm:mx-3">
+      <div className="flex items-center gap-1 mx-1 md:mx-3">
         {pages.map((page, idx) =>
           page === -1 ? (
             <span
               key={`ellipsis-${idx}`}
-              className="w-9 h-9 flex items-center justify-center text-text-secondary/50 text-sm"
+              className="w-9 h-9 hidden items-center justify-center text-text-secondary/50 text-sm md:flex"
               aria-hidden="true"
             >
               …
@@ -116,7 +97,7 @@ export default function Pagination({
           ) : page === currentPage ? (
             <span
               key={page}
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-accent text-white text-sm font-medium shadow-md shadow-accent/25"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-accent text-white text-sm font-medium"
               aria-current="page"
             >
               {page}
@@ -125,7 +106,7 @@ export default function Pagination({
             <Link
               key={page}
               href={buildHref(page)}
-              className="w-9 h-9 flex items-center justify-center rounded-full text-sm text-text-secondary hover:bg-accent-subtle hover:text-accent-dark transition-all duration-200 ease-out hover:scale-105 active:scale-95"
+              className={`w-9 h-9 ${(page === 1 && currentPage > 3) || (page === totalPages && currentPage < totalPages - 3) ? "hidden" : "flex"} items-center justify-center rounded-full text-sm text-text-secondary hover:bg-accent-subtle hover:text-accent-dark transition-all duration-180 ease-out md:flex`}
             >
               {page}
             </Link>
@@ -133,35 +114,25 @@ export default function Pagination({
         )}
       </div>
 
-      {/* Next page */}
-      {isLast ? (
-        <span className={`${navBtnBase} ${navBtnDisabled}`} aria-disabled="true">
-          <ChevronRight className="w-4 h-4" />
-        </span>
-      ) : (
-        <Link
-          href={buildHref(currentPage + 1)}
-          className={`${navBtnBase} ${navBtnEnabled}`}
-          aria-label="Next page"
-        >
-          <ChevronRight className="w-4 h-4" />
-        </Link>
-      )}
+      {/* Next page button */}
+      <Link
+        href={buildHref(currentPage + 1)}
+        className={`${navBtnBase} ${isLast ? navBtnDisabled : navBtnEnabled}`}
+        aria-disabled={isLast}
+        aria-label="Next page"
+      >
+        <ChevronRight className="w-4 h-4" />
+      </Link>
 
-      {/* Last page */}
-      {isLast ? (
-        <span className={`${navBtnBase} ${navBtnDisabled}`} aria-disabled="true">
-          <ChevronLast className="w-4 h-4" />
-        </span>
-      ) : (
-        <Link
-          href={buildHref(totalPages)}
-          className={`${navBtnBase} ${navBtnEnabled}`}
-          aria-label="Last page"
-        >
-          <ChevronLast className="w-4 h-4" />
-        </Link>
-      )}
+      {/* Last page button */}
+      <Link
+        href={buildHref(totalPages)}
+        className={`${navBtnBase} ${isLast ? navBtnDisabled : navBtnEnabled} hidden md:flex`}
+        aria-disabled={isLast}
+        aria-label="Last page"
+      >
+        <ChevronLast className="w-4 h-4" />
+      </Link>
     </nav>
   );
 }
