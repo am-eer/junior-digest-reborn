@@ -61,7 +61,7 @@ export default function Pagination({
   return (
     <nav
       aria-label="Page navigation"
-      className="flex items-center justify-center py-8 px-4 select-none max-w-[1200px] w-full mx-auto md:gap-1.5"
+      className="flex items-center justify-center py-8 px-4 select-none max-w-300 w-full mx-auto md:gap-1.5"
     >
       {/* First page button */}
       <Link

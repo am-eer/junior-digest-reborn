@@ -17,7 +17,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="mt-4 flex gap-2 justify-start max-w-[1200px] w-full mx-auto px-4 md:px-6 lg:px-8">
+        <nav className="mt-4 flex gap-2 justify-start max-w-300 w-full mx-auto px-4 md:px-6 lg:px-8">
             {links.map((link) => (
                 <Link
                     key={link.href}

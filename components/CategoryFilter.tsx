@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { API_JSON_URL } from "@/lib/globals";
+import { API_JSON_URL, INITIAL_CATEGORIES } from "@/lib/globals";
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -14,8 +14,21 @@ interface Props {
     categoryId?: number,
 }
 
+let initialCategories = [{id:-1, name:"All"}];
+if(INITIAL_CATEGORIES === undefined) {
+    console.log("Environment variable INITIAL_CATEGORIES is not defined");
+} else {
+    try {
+        initialCategories = JSON.parse(INITIAL_CATEGORIES);
+        // console.log(initialCategories);
+    } catch(e) {
+        console.log("Failed to parse initial categories JSON string from environment variable INITIAL_CATEGORIES", e);
+    }
+}
+
 export default function CategoryFilter({ categoryId = -1 }: Props) {
-    const [categories, setCategories] = useState([{id:-1, name:"All"}]);
+    // const [categories, setCategories] = useState([{id:-1, name:"All"}]);
+    const [categories, setCategories] = useState(initialCategories);
     const getCategories = async () => {
         const response = await fetch(`${API_JSON_URL}/categories?_fields=id,name&per_page=100`);
         const categories = await response.json() as category[];
@@ -35,7 +48,7 @@ export default function CategoryFilter({ categoryId = -1 }: Props) {
     };
 
     return (
-        <div className="max-w-[1200px] w-full mx-auto mb-4 px-4 md:px-6 lg:px-8 mt-6">
+        <div className="max-w-300 w-full mx-auto mb-4 px-4 md:px-6 lg:px-8 mt-6">
             <div className="flex items-center">
                 <button
                     onClick={() => scroll("left")}

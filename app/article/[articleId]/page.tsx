@@ -20,7 +20,6 @@ export default async function ArticlePage({ params }: Props) {
     const publishDate = article.date_gmt;
     const editDate = article.modified_gmt;
     const content = article.content.protected ? "Not available" : formatContent(article.content.rendered);
-    console.log(content);
     const categories = article._embedded["wp:term"][0];
     const imgData = {
         source_url: FALLBACK_IMG,
@@ -42,7 +41,7 @@ export default async function ArticlePage({ params }: Props) {
     const showImg = imgData.display && await goodImgCheck(imgData.source_url);
 
     return (
-        <main className="flex-1 max-w-[1200px] w-full mx-auto px-4 md:px-6 lg:px-8 py-8">
+        <main className="flex-1 max-w-300 w-full mx-auto px-4 md:px-6 lg:px-8 py-8">
             {/* Back navigation */}
             <BackButton />
 
@@ -50,7 +49,7 @@ export default async function ArticlePage({ params }: Props) {
             <article className="bg-surface-card rounded-card shadow-md overflow-hidden">
                 {/* Hero image */}
                 {showImg && (
-                    <div className="w-full aspect-21/9 overflow-hidden">
+                    <div className="w-full aspect-video overflow-hidden">
                         <img
                             src={imgData.source_url}
                             alt={imgData.alt_text}
@@ -96,7 +95,7 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Article content */}
                     <div
-                        className="article-content text-body max-w-[720px]"
+                        className="article-content text-body text-justify"
                         dangerouslySetInnerHTML={{ __html: content }}
                     />
                 </div>

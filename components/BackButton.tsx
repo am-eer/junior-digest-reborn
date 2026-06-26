@@ -9,7 +9,7 @@ export default function BackButton() {
     return (
         <button
             onClick={() => {
-                if (window.history.state?.idx > 0) {
+                if (window.history.length > 1) {
                     router.back();
                 } else {
                     router.push("/");

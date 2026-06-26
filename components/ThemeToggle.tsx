@@ -7,7 +7,7 @@ import { useTheme } from "next-themes"
 const btnStyle = "p-2 rounded-full border border-accent-subtle cursor-pointer text-text-secondary hover:border-accent hover:text-accent transition-all duration-180 ease-out";
 
 export function ThemeToggle() {
-    const { setTheme, theme } = useTheme()
+    const { setTheme, resolvedTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
@@ -24,10 +24,10 @@ export function ThemeToggle() {
 
     return (
         <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className={btnStyle}
         >
-            {theme === "dark" ? (
+            {resolvedTheme === "dark" ? (
                 <Sun className="h-[1.2rem] w-[1.2rem]" />
             ) : (
                 <Moon className="h-[1.2rem] w-[1.2rem]" />

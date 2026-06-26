@@ -17,14 +17,14 @@ export default async function Home({ params }: Props) {
   articles = articles.filter(article => article.status && article.status === "publish");
 
   let articleGrid = (
-    <main className="px-4 md:px-6 lg:px-8 py-6 text-center flex-1 grid place-items-center max-w-[1200px] w-full mx-auto">
+    <main className="px-4 md:px-6 lg:px-8 py-6 text-center flex-1 grid place-items-center max-w-300 w-full mx-auto">
       Sorry, no articles available
     </main>
   );
 
   if (0 < articles.length) {
     articleGrid = (
-      <main className="px-4 md:px-6 lg:px-8 py-6 grid grid-cols-1 gap-6 flex-1 md:grid-cols-2 lg:grid-cols-3 max-w-[1200px] w-full mx-auto">
+      <main className="px-4 md:px-6 lg:px-8 py-6 grid grid-cols-1 gap-6 flex-1 md:grid-cols-2 lg:grid-cols-3 max-w-300 w-full mx-auto">
         {articles.map((article, idx) => (
           <ArticleCard
             key={idx}
