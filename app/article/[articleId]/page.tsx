@@ -4,6 +4,7 @@ import { goodImgCheck, formatContent } from "@/lib/utils";
 import TimeAgo from "@/components/TimeAgo";
 import Link from "next/link";
 import BackButton from "@/components/BackButton";
+import ShareButton from "@/components/ShareButton";
 import { Calendar, Pencil } from "lucide-react";
 
 interface Props {
@@ -42,8 +43,11 @@ export default async function ArticlePage({ params }: Props) {
 
     return (
         <main className="flex-1 max-w-300 w-full mx-auto px-4 md:px-6 lg:px-8 py-8">
-            {/* Back navigation */}
-            <BackButton />
+            {/* Top navigation */}
+            <div className="flex items-center gap-6 mb-8">
+                <BackButton />
+                <ShareButton />
+            </div>
 
             {/* Article card container */}
             <article className="bg-surface-card rounded-card shadow-md overflow-hidden">
