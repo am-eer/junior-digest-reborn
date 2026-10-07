@@ -26,9 +26,9 @@ function getRelativeTime(dateGmt: string): string {
     const diffSeconds = Math.round((nowUtc - then.getTime()) / 1000);
 
     // Handle future dates or just now
-    if (diffSeconds < 1) return "just now";
+    if (diffSeconds < 1) return "Just now";
 
-    const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+    const rtf = new Intl.RelativeTimeFormat("en", { numeric: "always" });
 
     for (const { unit, seconds } of UNITS) {
         const value = Math.floor(diffSeconds / seconds);
@@ -38,7 +38,7 @@ function getRelativeTime(dateGmt: string): string {
         }
     }
 
-    return "just now";
+    return "Just now";
 }
 
 export default function TimeAgo({ dateGmt, className }: Props) {
