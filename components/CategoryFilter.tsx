@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { API_JSON_URL, INITIAL_CATEGORIES } from "@/lib/globals";
+import { CUSTOM_API_JSON_URL, INITIAL_CATEGORIES } from "@/lib/globals";
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -30,7 +30,7 @@ export default function CategoryFilter({ categoryId = -1 }: Props) {
     // const [categories, setCategories] = useState([{id:-1, name:"All"}]);
     const [categories, setCategories] = useState(initialCategories);
     const getCategories = async () => {
-        const response = await fetch(`${API_JSON_URL}/categories?_fields=id,name&per_page=100`);
+        const response = await fetch(`${CUSTOM_API_JSON_URL}/categories-by-recent-post`);
         const categories = await response.json() as category[];
         setCategories([{id:-1, name:"All"}, ...categories]);
     }

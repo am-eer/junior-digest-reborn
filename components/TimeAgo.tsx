@@ -38,7 +38,7 @@ function getRelativeTime(dateGmt: string): string {
         }
     }
 
-    return "Just now";
+    return "";
 }
 
 export default function TimeAgo({ dateGmt, className }: Props) {
