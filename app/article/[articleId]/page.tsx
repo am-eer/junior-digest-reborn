@@ -6,6 +6,7 @@ import Link from "next/link";
 import BackButton from "@/components/BackButton";
 import ShareButton from "@/components/ShareButton";
 import { Calendar, Pencil } from "lucide-react";
+import Related from "@/components/Related";
 
 interface Props {
     params: Promise<{ articleId: string }>,
@@ -104,6 +105,12 @@ export default async function ArticlePage({ params }: Props) {
                     />
                 </div>
             </article>
+
+            {/* Related News */}
+            <h2 className="text-display text-2xl md:text-3xl mt-12 mb-6">
+                Related
+            </h2>
+            <Related categories={categories}/>
         </main>
     );
 }

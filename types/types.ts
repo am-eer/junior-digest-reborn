@@ -5,7 +5,6 @@ export interface Article {
   title: {
     rendered: string,
   },
-  status: string,
   content: {
     rendered: string,
     protected: boolean,
