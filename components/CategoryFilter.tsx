@@ -20,7 +20,6 @@ if(INITIAL_CATEGORIES === undefined) {
 } else {
     try {
         initialCategories = JSON.parse(INITIAL_CATEGORIES);
-        // console.log(initialCategories);
     } catch(e) {
         console.log("Failed to parse initial categories JSON string from environment variable INITIAL_CATEGORIES", e);
     }

@@ -107,9 +107,13 @@ export default async function ArticlePage({ params }: Props) {
             </article>
 
             {/* Related News */}
-            <h2 className="text-display text-2xl md:text-3xl mt-12 mb-6">
-                Related
-            </h2>
+            <div className="flex items-center gap-4 md:gap-6 my-12">
+                <div className="flex-1 h-px bg-text-secondary/20" />
+                <h2 className="text-xl md:text-2xl font-light text-text-secondary">
+                    Related
+                </h2>
+                <div className="flex-1 h-px bg-text-secondary/20" />
+            </div>
             <Related categories={categories}/>
         </main>
     );

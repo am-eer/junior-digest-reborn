@@ -13,7 +13,8 @@ export default function Navbar() {
     const links = [
         { href: "/", label: "Home" },
         { href: "/team", label: "Team" },
-        { href: `mailto:${CONTACT_EMAIL}`, label: "Contact" },
+        { href: "/archives", label: "Archives" },
+        { href: `mailto:${CONTACT_EMAIL}`, label: "Email Us" },
     ];
 
     return (
