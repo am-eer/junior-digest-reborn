@@ -8,7 +8,7 @@ interface Props {
     params: Promise<{ searchTerm: string, pageNo: string }>,
 }
 
-export default async function Home({ params }: Props) {
+export default async function SearchResults({ params }: Props) {
   const { searchTerm, pageNo } = await params;
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
   const response = await fetch(`${API_JSON_URL}/posts?search=${searchTerm}&page=${pageNo}&per_page=24&_embed${fields}`);

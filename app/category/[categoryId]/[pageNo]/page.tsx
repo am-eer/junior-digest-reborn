@@ -8,7 +8,7 @@ interface Props {
     params: Promise<{ categoryId: string, pageNo: string }>,
 }
 
-export default async function Home({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const { categoryId, pageNo } = await params;
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
   const response = await fetch(`${API_JSON_URL}/posts?categories=${categoryId}&per_page=24&page=${pageNo}&_embed${fields}`);

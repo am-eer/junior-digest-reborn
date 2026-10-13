@@ -30,5 +30,5 @@ export default function Archives() {
     i.setMonth(i.getMonth() - 1);
   }
 
-  return <main className="lg:py-6 grid grid-cols-2 gap-6 flex-1 md:grid-cols-3 lg:grid-cols-6 max-w-300 w-full mx-auto">{months}</main>;
+  return <main className="p-6 grid grid-cols-2 gap-6 flex-1 md:grid-cols-3 lg:grid-cols-4 max-w-300 w-full mx-auto">{months}</main>;
 }
