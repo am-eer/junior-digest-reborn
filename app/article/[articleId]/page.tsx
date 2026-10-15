@@ -114,7 +114,7 @@ export default async function ArticlePage({ params }: Props) {
                 </h2>
                 <div className="flex-1 h-px bg-text-secondary/20" />
             </div>
-            <Related categories={categories}/>
+            <Related categories={categories} currentArticle={articleId}/>
         </main>
     );
 }

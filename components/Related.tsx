@@ -6,13 +6,14 @@ interface RelatedProps {
   categories: {
     id: number,
     name: string
-  }[]
+  }[],
+  currentArticle: string
 }
 
-export default async function Related({categories}:RelatedProps) {
+export default async function Related({categories, currentArticle}:RelatedProps) {
   const categoryIds = categories.map((category) => category.id).join();
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=6&_embed${fields}&categories=${categoryIds}`);
+  const response = await fetch(`${API_JSON_URL}/posts?per_page=6&exclude=${currentArticle}&_embed${fields}&categories=${categoryIds}`);
   let articles = await response.json() as Article[];
 
   let articleGrid = (
