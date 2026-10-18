@@ -1,5 +1,5 @@
 import type { Article } from "@/types/types";
-import { API_JSON_URL, FALLBACK_IMG } from "@/lib/globals";
+import { API_JSON_URL, FALLBACK_IMG, CACHE_OPTIONS } from "@/lib/globals";
 import { goodImgCheck, formatContent } from "@/lib/utils";
 import TimeAgo from "@/components/TimeAgo";
 import Link from "next/link";
@@ -15,7 +15,7 @@ interface Props {
 export default async function ArticlePage({ params }: Props) {
     const { articleId } = await params;
     const fields = "&fields=date_gmt,modified_gmt,title,content,_links,_embedded";
-    const response = await fetch(`${API_JSON_URL}/posts/${articleId}?_embed${fields}`);
+    const response = await fetch(`${API_JSON_URL}/posts/${articleId}?_embed${fields}`, CACHE_OPTIONS);
     const article = await response.json() as Article;
 
     const title = article.title.rendered;

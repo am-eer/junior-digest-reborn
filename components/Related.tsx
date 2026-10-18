@@ -1,4 +1,4 @@
-import { API_JSON_URL } from "@/lib/globals";
+import { API_JSON_URL, CACHE_OPTIONS } from "@/lib/globals";
 import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 
@@ -13,7 +13,7 @@ interface RelatedProps {
 export default async function Related({categories, currentArticle}:RelatedProps) {
   const categoryIds = categories.map((category) => category.id).join();
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=6&exclude=${currentArticle}&_embed${fields}&categories=${categoryIds}`);
+  const response = await fetch(`${API_JSON_URL}/posts?per_page=6&exclude=${currentArticle}&_embed${fields}&categories=${categoryIds}`, CACHE_OPTIONS);
   let articles = await response.json() as Article[];
 
   let articleGrid = (

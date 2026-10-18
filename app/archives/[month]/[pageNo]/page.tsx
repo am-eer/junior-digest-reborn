@@ -1,4 +1,4 @@
-import { API_JSON_URL } from "@/lib/globals";
+import { API_JSON_URL, CACHE_OPTIONS } from "@/lib/globals";
 import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryFilter from "@/components/CategoryFilter";
@@ -15,7 +15,7 @@ export default async function ArchivedMonth({ params }: Props) {
   nextMonth.setMonth(nextMonth.getMonth() + 1);
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
   const response = await fetch(
-    `${API_JSON_URL}/posts?after=${dateObj.toISOString()}&before=${nextMonth.toISOString()}&per_page=24&page=${pageNo}&_embed${fields}`,
+    `${API_JSON_URL}/posts?after=${dateObj.toISOString()}&before=${nextMonth.toISOString()}&per_page=24&page=${pageNo}&_embed${fields}`, CACHE_OPTIONS
   );
   const totalPages = Number(response.headers.get("X-WP-TotalPages"));
   let articles = (await response.json()) as Article[];

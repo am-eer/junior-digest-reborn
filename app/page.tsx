@@ -1,4 +1,4 @@
-import { API_JSON_URL } from "@/lib/globals";
+import { API_JSON_URL, CACHE_OPTIONS } from "@/lib/globals";
 import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryFilter from "@/components/CategoryFilter";
@@ -6,7 +6,7 @@ import Pagination from "@/components/Pagination";
 
 export default async function Home() {
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=23&_embed${fields}`);
+  const response = await fetch(`${API_JSON_URL}/posts?per_page=23&_embed${fields}`, CACHE_OPTIONS);
   const totalPages = Math.ceil((Number(response.headers.get('X-WP-Total')) + 1)/24);
   let articles = await response.json() as Article[];
 
