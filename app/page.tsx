@@ -8,7 +8,7 @@ export default async function Home() {
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
   const response = await fetch(`${API_JSON_URL}/posts?per_page=23&_embed${fields}`, CACHE_OPTIONS);
   const totalPages = Math.ceil((Number(response.headers.get('X-WP-Total')) + 1)/24);
-  let articles = await response.json() as Article[];
+  const articles = await response.json() as Article[];
 
   let articleGrid = (
     <main className="px-4 md:px-6 lg:px-8 py-6 text-center flex-1 grid place-items-center max-w-300 w-full mx-auto">

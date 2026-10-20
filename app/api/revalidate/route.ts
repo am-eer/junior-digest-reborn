@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
 
 export async function POST(request: NextRequest) {
-  const secret = request.headers.get("x-webhook-secret");
+  const secret = request.headers.get("X-Webhook-Secret");
 
   if (
     !process.env.WEBHOOK_SECRET ||
@@ -18,7 +18,9 @@ export async function POST(request: NextRequest) {
 
   revalidateTag("all", { expire: 0 });
 
-  console.log("Cache revalidation webhook succeeded");
+  const body = await request.json();
+  const { post_id, post_type, status, reason } = body;
+  console.log(`Cache revalidation webhook succeeded, post_id: ${post_id}, post_type: ${post_type}, status: ${status}, reason: ${reason}`);
 
   return NextResponse.json({
     revalidated: true,
