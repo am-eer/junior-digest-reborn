@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const secret = request.headers.get("X-Webhook-Secret");
@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
   }
 
   revalidateTag("all", { expire: 0 });
+  revalidatePath("/"); // to solve home page caching bugs
 
   const body = await request.json();
   const { post_id, post_type, status, reason } = body;
