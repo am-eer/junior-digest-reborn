@@ -14,7 +14,7 @@ export default function TeamPage() {
                 <h2 className="text-2xl font-medium mb-4 border-b border-gray-300 pb-2">
                     HONORARY EDITORIAL CONSULTANTS
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-12">
                     <div className="flex justify-between">
                         <span className="font-medium">Ajitkumar N.</span>
                         <span className="text-text-secondary">Tax & Finance</span>
@@ -32,7 +32,7 @@ export default function TeamPage() {
                         <span className="text-text-secondary">Science</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="font-medium">Saji Poriyat</span>
+                        <span className="font-medium">Saji Poriyath</span>
                         <span className="text-text-secondary">Journalism</span>
                     </div>
                     <div className="flex justify-between">
@@ -44,8 +44,12 @@ export default function TeamPage() {
                         <span className="text-text-secondary">Law</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="font-medium">C.C. JOSEPH</span>
+                        <span className="font-medium">C.C. Joseph</span>
                         <span className="text-text-secondary">Govt. Policy</span>
+                    </div>
+                    <div className="flex justify-between">
+                        <span className="font-medium">Unnikrishnan Nair B.</span>
+                        <span className="text-text-secondary">Culture & Religion</span>
                     </div>
                 </div>
             </section>
