@@ -1,4 +1,5 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "noEnvFile";
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "noEnvFile";
 export const API_JSON_URL = `${API_BASE_URL}/wp-json/wp/v2`;
 export const CUSTOM_API_JSON_URL = `${API_BASE_URL}/wp-json/custom-endpoints/v1`;
 export const API_IMG_HOST = API_BASE_URL.replace("https://", "");
