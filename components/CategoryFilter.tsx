@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CUSTOM_API_JSON_URL, INITIAL_CATEGORIES } from "@/lib/globals";
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { fetchWordPressJSON } from "@/lib/utils";
 
 interface category {
     id: number
@@ -29,8 +30,7 @@ export default function CategoryFilter({ categoryId = -1 }: Props) {
     // const [categories, setCategories] = useState([{id:-1, name:"All"}]);
     const [categories, setCategories] = useState(initialCategories);
     const getCategories = async () => {
-        const response = await fetch(`${CUSTOM_API_JSON_URL}/categories-by-recent-post`);
-        const categories = await response.json() as category[];
+        const { data: categories } = await fetchWordPressJSON<category[]>(`${CUSTOM_API_JSON_URL}/categories-by-recent-post`);
         setCategories([{id:-1, name:"All"}, ...categories]);
     }
     useEffect(() => {getCategories();}, []);

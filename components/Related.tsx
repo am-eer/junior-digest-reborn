@@ -1,6 +1,7 @@
 import { API_JSON_URL, CACHE_OPTIONS } from "@/lib/globals";
 import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
+import { fetchWordPressJSON } from "@/lib/utils";
 
 interface RelatedProps {
   categories: {
@@ -13,8 +14,7 @@ interface RelatedProps {
 export default async function Related({categories, currentArticle}:RelatedProps) {
   const categoryIds = categories.map((category) => category.id).join();
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
-  const response = await fetch(`${API_JSON_URL}/posts?per_page=6&exclude=${currentArticle}&_embed${fields}&categories=${categoryIds}`, CACHE_OPTIONS);
-  let articles = await response.json() as Article[];
+  const { data: articles } = await fetchWordPressJSON<Article[]>(`${API_JSON_URL}/posts?per_page=6&exclude=${currentArticle}&_embed${fields}&categories=${categoryIds}`, CACHE_OPTIONS);
 
   let articleGrid = (
     <main className="px-4 md:px-6 lg:px-8 py-6 text-center flex-1 grid place-items-center max-w-300 w-full mx-auto">

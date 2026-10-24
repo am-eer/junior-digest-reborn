@@ -3,6 +3,7 @@ import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import Pagination from "@/components/Pagination";
+import { fetchWordPressJSON } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ month: string; pageNo: string }>;
@@ -14,11 +15,10 @@ export default async function ArchivedMonth({ params }: Props) {
   const nextMonth = new Date(month);
   nextMonth.setMonth(nextMonth.getMonth() + 1);
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
-  const response = await fetch(
+  const { data: articles, response } = await fetchWordPressJSON<Article[]>(
     `${API_JSON_URL}/posts?after=${dateObj.toISOString()}&before=${nextMonth.toISOString()}&per_page=24&page=${pageNo}&_embed${fields}`, CACHE_OPTIONS
   );
   const totalPages = Number(response.headers.get("X-WP-TotalPages"));
-  let articles = (await response.json()) as Article[];
 
   let articleGrid = (
     <main className="px-4 md:px-6 lg:px-8 py-6 text-center flex-1 grid place-items-center max-w-300 w-full mx-auto">
