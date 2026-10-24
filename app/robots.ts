@@ -25,6 +25,18 @@ export default function robots(): MetadataRoute.Robots {
           "AhrefsBot",
           "SemrushBot",
           "MJ12bot",
+          // Major search engines (excluding Google)
+          "Bingbot",
+          "msnbot",
+          "Slurp",
+          "DuckDuckBot",
+          "Baiduspider",
+          "YandexBot",
+          "Applebot",
+          "Yeti",
+          "Sogou web spider",
+          "SeznamBot",
+          "Qwantify",
           // Social media crawlers
           "facebookexternalhit",
           "Facebot",
