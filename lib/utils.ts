@@ -44,3 +44,7 @@ export async function fetchWordPressJSON<T>(
 
   return { data, response };
 }
+
+export function isOnlyDigits(str: string): boolean {
+  return /^\d+$/.test(str);
+}

@@ -3,14 +3,16 @@ import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import Pagination from "@/components/Pagination";
-import { fetchWordPressJSON } from "@/lib/utils";
+import { fetchWordPressJSON, isOnlyDigits } from "@/lib/utils";
+import { notFound } from 'next/navigation';
 
 interface Props {
     params: Promise<{ pageNo: string }>,
 }
 
 export default async function Home({ params }: Props) {
-  const { pageNo } = await params;  
+  const { pageNo } = await params;
+  if(!isOnlyDigits(pageNo)) notFound();
   const fields = "&_fields=id,title,date_gmt,content,_links,_embedded";
   const { data: articles, response } = await fetchWordPressJSON<Article[]>(`${API_JSON_URL}/posts?per_page=24&offset=${23 + 24 * (Number(pageNo)-2)}&_embed${fields}`, CACHE_OPTIONS);
   const totalPages = Number(response.headers.get('X-WP-TotalPages'));
