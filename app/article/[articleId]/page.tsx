@@ -1,12 +1,13 @@
 import type { Article } from "@/types/types";
 import { API_JSON_URL, FALLBACK_IMG, CACHE_OPTIONS } from "@/lib/globals";
-import { goodImgCheck, formatContent, fetchWordPressJSON } from "@/lib/utils";
+import { goodImgCheck, formatContent, fetchWordPressJSON, isOnlyDigits } from "@/lib/utils";
 import TimeAgo from "@/components/TimeAgo";
 import Link from "next/link";
 import BackButton from "@/components/BackButton";
 import ShareButton from "@/components/ShareButton";
 import { Calendar, Pencil } from "lucide-react";
 import Related from "@/components/Related";
+import { notFound } from 'next/navigation';
 
 interface Props {
     params: Promise<{ articleId: string }>,
@@ -14,6 +15,7 @@ interface Props {
 
 export default async function ArticlePage({ params }: Props) {
     const { articleId } = await params;
+    if(!isOnlyDigits(articleId)) notFound();
     const fields = "&fields=date_gmt,modified_gmt,title,content,_links,_embedded";
     const { data: article } = await fetchWordPressJSON<Article>(`${API_JSON_URL}/posts/${articleId}?_embed${fields}`, CACHE_OPTIONS);
 

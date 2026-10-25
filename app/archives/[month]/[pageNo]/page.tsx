@@ -3,7 +3,8 @@ import { Article } from "@/types/types";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import Pagination from "@/components/Pagination";
-import { fetchWordPressJSON } from "@/lib/utils";
+import { fetchWordPressJSON, isOnlyDigits, isValidArchiveMonth } from "@/lib/utils";
+import { notFound } from 'next/navigation';
 
 interface Props {
   params: Promise<{ month: string; pageNo: string }>;
@@ -11,6 +12,8 @@ interface Props {
 
 export default async function ArchivedMonth({ params }: Props) {
   const { month, pageNo } = await params;
+  if(!(isOnlyDigits(pageNo) && Number(pageNo) > 0)) notFound();
+  if(!isValidArchiveMonth(month)) notFound();
   const dateObj = new Date(month);
   const nextMonth = new Date(month);
   nextMonth.setMonth(nextMonth.getMonth() + 1);
